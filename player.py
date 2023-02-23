@@ -23,3 +23,6 @@ class Player:
 
     def add_trinket(self, amt):
         self.pages += amt
+    
+    def print_status(self):
+        print(f'Energy: {self.get_energy()}, Pages: {self.get_trinket_count()}')
