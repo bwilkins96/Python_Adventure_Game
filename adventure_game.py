@@ -55,7 +55,10 @@ class AdventureGame:
             print('\nAccording to your map, you are only 1 step away from the treasure!')
 
         while True:
-            choice = input('What do you do ("h" for help)? ')[0].lower()
+            try:
+                choice = input('What do you do ("h" for help)? ')[0].lower()
+            except: 
+                choice = ''
 
             if choice == 's':
                 self.player.print_status()
