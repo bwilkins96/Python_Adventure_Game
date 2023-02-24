@@ -20,6 +20,14 @@ class AdventureGame:
 
     def end_game(self):
         self.game_over = True
+    
+    def set_up_player(self):
+        while True:
+            name = input('\nWhat is your name? ')
+            if len(name) > 0: break
+            print('You didn\'t enter anything! :)')
+
+        self.player = Player(name)
 
     def print_header(self):
         print('-'*29)
@@ -30,7 +38,7 @@ class AdventureGame:
         print('\nPress "w" to take a step, "s" to check your status, "l" to look behind you, or "q" to quit')
 
     def print_intro(self):
-        print(f'\nHello {self.player.get_name()}!')
+        print(f'Hello {self.player.get_name()}!')
 
         print('\nYou are on the beach of an uninhabited island searching for treasure.')
         print('You are not searching for just any treasure, this treasure is')
@@ -38,11 +46,14 @@ class AdventureGame:
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
         print('as well as lots of gold!')
 
-        self.print_help()
-
     def handle_move(self):
-        print(f'\nAccording to your map, you are {self.get_moves()} steps away from the treasure.')
-        
+        if self.get_moves() == 10:
+            self.print_help()
+        elif self.get_moves() > 1:
+            print(f'\nAccording to your map, you are {self.get_moves()} steps away from the treasure.')
+        else:
+            print('\nAccording to your map, you are only 1 step away from the treasure!')
+
         while True:
             choice = input('What do you do ("h" for help)? ')[0].lower()
 
@@ -54,27 +65,47 @@ class AdventureGame:
                 self.print_help()
 
             if choice in ['w','q']: break
+        
+        #print('\033c', end='')
 
         if choice == 'w':
             print('\nYou take a step forward.')
         else:
             self.end_game()
+    
+    def handle_treasure(self):
+        print('You find a rock with an engraving of an "X".')
+        print('This must be the spot!')
+
+        input('\nYou pull out your trusty shovel. Press <enter> to dig.')
+        input('You start digging. Press <enter> to dig.')
+        input('You hit the top of something with your shovel. Press <enter> to dig.')
+        print('You uncover a treasure chest and pull it out of the hole.')
+        
+        input('\nPress <enter> to open the chest.')
+        print('You break a lock and open the chest!')
+        print('Within is lots of gold coins...')
+        print('However, you don\'t see anything related to the meaning of life')
+
+        input('\nPress <enter> to investigate further.')
+        print('You reach into the sea of gold coins and pull out a scroll!')
+
+        input('\nPress <enter> to open the scroll.')
+        print('You awaken in your bed, realizing that it was just a dream.')
 
     def run(self):
         self.print_header()
-        
-        name = input('\nWhat is your name? ')
-        self.player = Player(name)
+        self.set_up_player()
         self.print_intro()
 
         while not self.is_game_over():
-            if self.get_moves() >= 2:
+            if self.get_moves() >= 1:
                 self.handle_move()
                 self.decrement_moves()
             else:
-                print('You found the treasure!')
+                self.handle_treasure()
                 self.end_game()
         
-        print('\nGAME OVER!\n')
+        print('\nGAME OVER!')
 
 if __name__ == '__main__': AdventureGame().run()
