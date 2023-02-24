@@ -46,6 +46,11 @@ class AdventureGame:
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
         print('as well as lots of gold!')
 
+    def handle_step(self):
+        print('\nYou take a step forward.')
+
+        # Handle random event here
+
     def handle_move(self):
         if self.get_moves() == 10:
             self.print_help()
@@ -72,29 +77,29 @@ class AdventureGame:
         #print('\033c', end='')
 
         if choice == 'w':
-            print('\nYou take a step forward.')
+            self.handle_step()
         else:
             self.end_game()
     
     def handle_treasure(self):
         print('You find a rock with an engraving of an "X".')
-        print('This must be the spot!')
+        input('This must be the spot! Press <enter> to continue.')
 
         input('\nYou pull out your trusty shovel. Press <enter> to dig.')
         input('You start digging. Press <enter> to dig.')
         input('You hit the top of something with your shovel. Press <enter> to dig.')
         print('You uncover a treasure chest and pull it out of the hole.')
-        
-        input('\nPress <enter> to open the chest.')
-        print('You break a lock and open the chest!')
+        input('Press <enter> to open the chest.')
+
+        print('\nYou break a lock and open the chest!')
         print('Within is lots of gold coins...')
         print('However, you don\'t see anything related to the meaning of life')
+        input('Press <enter> to investigate further.')
+        
+        print('\nYou reach into the sea of gold coins and pull out a scroll!')
+        input('Press <enter> to open the scroll.')
 
-        input('\nPress <enter> to investigate further.')
-        print('You reach into the sea of gold coins and pull out a scroll!')
-
-        input('\nPress <enter> to open the scroll.')
-        print('You awaken in your bed, realizing that it was just a dream.')
+        print('\nYou awaken in your bed, realizing that it was just a dream.')
 
     def run(self):
         self.print_header()
