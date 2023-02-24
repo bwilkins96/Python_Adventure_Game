@@ -22,30 +22,37 @@ class Enemy:
         self.energy -= amt
     
     def print_intro(self):
-        print(self.get_intro())
+        for line in self.get_intro():
+            print(line)
 
 class Crab(Enemy):
     def __init__(self):
-        intro = 'A crab approaches you!'
+        intro = ['A crab approaches you!']
         super().__init__('Crab', intro)
 
 class Philosopher(Enemy):
     def __init__(self):
-        intro = 'A philosopher approaches you, saying "I will convince you to not dig up that ' +\
-        'buried treasure! It\'s unnecessary, you see, because I already know what ' +\
-        'the meaning of life is!"'
+        intro = [
+            'A philosopher approaches you, saying "I will convince you to not dig up that',
+            'buried treasure! It\'s unnecessary, you see, because I already know what',
+            'the meaning of life is!"'
+            ]
         super().__init__('Philosopher', intro)
 
 class ExistentialCrisis(Enemy):
     def __init__(self):
-        intro = 'You are plagued by an existential crisis! What if you discover that ' +\
-            'you\'re current beliefs are wrong?' 
+        intro = [
+            'You are plagued by an existential crisis! What if you discover that',
+            'you\'re current beliefs are wrong?'
+            ] 
         super().__init__('Existential Crisis', intro)
 
 class BoltzmannBrain(Enemy):
     def __init__(self):
-        intro = 'Suprisingly, a floating Boltzmann brain approaches you!' +\
-            ' It says to you, from within your own brain, "Yes, I did spontaneously ' +\
-            'pop into existence and I\'m going to stop you!' +\
+        intro = [
+            'Suprisingly, a floating Boltzmann brain approaches you!',
+            'It says to you, from within your own brain, "Yes, I did spontaneously',
+            'pop into existence and I\'m going to stop you!',
             '\nYou\'re not sure how any of this is even possible.'
+            ]
         super().__init__('Botzmann Brain', intro)
