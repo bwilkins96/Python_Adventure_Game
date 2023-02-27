@@ -1,6 +1,7 @@
 # Adventure Game project designed for Maryville University
 # SWDV 600: Intro to Programming
 
+from random import random
 from player import Player
 from enemies import Enemy, Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
 
@@ -8,12 +9,18 @@ class AdventureGame:
     def __init__(self):
         self.moves = 10
         self.game_over = False
+        self.possible_encounters = [
+            'Pages', 'Crab', 'Philosopher', 'Existential', 'Botzmann'
+        ]
     
     def get_moves(self):
         return self.moves
     
     def is_game_over(self):
         return self.game_over
+    
+    def get_encounters(self):
+        return self.possible_encounters
     
     def decrement_moves(self):
         self.moves -= 1
@@ -28,6 +35,22 @@ class AdventureGame:
             print('You didn\'t enter anything! :)')
 
         self.player = Player(name)
+    
+    def get_random_choice(self):
+        rand_val = random()
+
+        if rand_val < 0.35:
+            choice = 0
+        elif rand_val < 0.55:
+            choice = 1
+        elif rand_val < 0.75:
+            choice = 2
+        elif rand_val < 0.95:
+            choice = 3
+        else:
+            choice = 4
+        
+        return self.get_encounters()[choice]
 
     def print_header(self):
         print('-'*29)
@@ -50,6 +73,8 @@ class AdventureGame:
         print('\nYou take a step forward.')
 
         # Handle random event here
+        encounter = self.get_random_choice()
+        print(encounter)
 
     def handle_move(self):
         if self.get_moves() == 10:
