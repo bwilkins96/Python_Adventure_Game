@@ -1,7 +1,7 @@
 # Adventure Game project designed for Maryville University
 # SWDV 600: Intro to Programming
 
-from random import random
+from random import random, randrange
 from player import Player
 from enemies import Enemy, Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
 
@@ -72,9 +72,19 @@ class AdventureGame:
     def handle_step(self):
         print('\nYou take a step forward.')
 
-        # Handle random event here
         encounter = self.get_random_choice()
         print(encounter)
+
+        if encounter == 'Pages':
+            num_pages = randrange(1, 10)
+            self.player.add_trinket(num_pages)
+
+            if num_pages == 1:
+                print('You found a page.')
+            else:
+                print(f'You found {num_pages} pages.')
+        else:
+            pass
 
     def handle_move(self):
         if self.get_moves() == 10:
