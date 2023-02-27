@@ -31,3 +31,11 @@ class Player:
         print('\nYou look behind you and see the crashing waves of the ocean,')
         print(f'as well as the ship you came here on, the Ship of {self.name.capitalize()}!')
         print('If you replaced every piece of your ship over time, would it be the same ship?\n')
+
+    def attack_enemy(self, enemy, choice):
+        if choice == 'a':
+            enemy.handle_attack()
+        elif choice == 'd':
+            enemy.handle_debate()
+        else:
+            enemy.handle_reassurance()
