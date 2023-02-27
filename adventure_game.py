@@ -12,6 +12,7 @@ class AdventureGame:
         self.possible_encounters = [
             'Pages', 'Crab', 'Philosopher', 'Existential', 'Botzmann'
         ]
+        self.current_enemy = None
     
     def get_moves(self):
         return self.moves
@@ -35,6 +36,16 @@ class AdventureGame:
             print('You didn\'t enter anything! :)')
 
         self.player = Player(name)
+    
+    def set_up_enemy(self, type):
+        if type == 'Crab':
+            self.current_enemy = Crab()
+        elif type == 'Philosopher':
+            self.current_enemy = Philosopher()
+        elif type == 'Existential':
+            self.current_enemy = ExistentialCrisis()
+        else:
+            self.current_enemy = BoltzmannBrain()
     
     def get_random_choice(self):
         rand_val = random()
@@ -73,7 +84,6 @@ class AdventureGame:
         print('\nYou take a step forward.')
 
         encounter = self.get_random_choice()
-        print(encounter)
 
         if encounter == 'Pages':
             num_pages = randrange(1, 10)
@@ -84,7 +94,11 @@ class AdventureGame:
             else:
                 print(f'You found {num_pages} pages.')
         else:
-            pass
+            self.set_up_enemy(encounter)
+            print()
+            self.current_enemy.print_intro()
+
+            self.current_enemy = None
 
     def handle_move(self):
         if self.get_moves() == 10:
