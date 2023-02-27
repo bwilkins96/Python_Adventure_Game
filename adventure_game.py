@@ -62,6 +62,22 @@ class AdventureGame:
             choice = 4
         
         return self.get_encounters()[choice]
+    
+    def get_attack_choice(self):
+        enemy_name = self.current_enemy.get_name().lower()
+
+        while True:
+            choice = input(f'What do you do about the {enemy_name} ("h" for help)? ')
+            
+            if len(choice) > 0:
+                choice = choice[0].lower()
+
+            if choice in ['a', 'd', 'r']:
+                break
+            elif choice == 'h':
+                self.print_attack_help()
+
+        return choice
 
     def print_header(self):
         print('-'*29)
@@ -70,6 +86,9 @@ class AdventureGame:
 
     def print_help(self):
         print('\nPress "w" to take a step, "s" to check your status, "l" to look behind you, or "q" to quit')
+
+    def print_attack_help(self):
+        print('\nPress "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
         print(f'Hello {self.player.get_name()}!')
@@ -97,6 +116,11 @@ class AdventureGame:
             self.set_up_enemy(encounter)
             print()
             self.current_enemy.print_intro()
+
+            self.print_attack_help()
+            choice = self.get_attack_choice()
+
+            print(choice)
 
             self.current_enemy = None
 
