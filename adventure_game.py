@@ -114,7 +114,6 @@ class AdventureGame:
                 print(f'You found {num_pages} pages.')
         else:
             self.set_up_enemy(encounter)
-            print()
             self.current_enemy.print_intro()
 
             self.print_attack_help()

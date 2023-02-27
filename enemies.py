@@ -27,13 +27,13 @@ class Enemy:
 
 class Crab(Enemy):
     def __init__(self):
-        intro = ['A crab approaches you!']
+        intro = ['\nA crab approaches you!']
         super().__init__('Crab', intro)
 
 class Philosopher(Enemy):
     def __init__(self):
         intro = [
-            'A philosopher approaches you, saying "I will convince you to not dig up that',
+            '\nA philosopher approaches you, saying "I will convince you to not dig up that',
             'buried treasure! It\'s unnecessary, you see, because I already know what',
             'the meaning of life is!"'
             ]
@@ -42,7 +42,7 @@ class Philosopher(Enemy):
 class ExistentialCrisis(Enemy):
     def __init__(self):
         intro = [
-            'You are plagued by an existential crisis! What if you discover that',
+            '\nYou are plagued by an existential crisis! What if you discover that',
             'you\'re current beliefs are wrong?'
             ] 
         super().__init__('Existential Crisis', intro)
@@ -50,7 +50,7 @@ class ExistentialCrisis(Enemy):
 class BoltzmannBrain(Enemy):
     def __init__(self):
         intro = [
-            'Suprisingly, a floating Boltzmann brain approaches you!',
+            '\nSuprisingly, a floating Boltzmann brain approaches you!',
             'It says to you, from within your own brain, "Yes, I did spontaneously',
             'pop into existence and I\'m going to stop you!',
             '\nYou\'re not sure how any of this is even possible.'
