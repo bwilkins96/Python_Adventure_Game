@@ -24,7 +24,7 @@ class AdventureGame:
         return self.possible_encounters
     
     def get_enemy(self):
-        return self.current_enemy()
+        return self.current_enemy
     
     def decrement_moves(self):
         self.moves -= 1

@@ -1,4 +1,4 @@
-# Enemy classes
+# Enemy classes for the Adventure Game project
 
 class Enemy:
     def __init__(self, name, intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list):
@@ -52,12 +52,15 @@ class Enemy:
 
     def handle_attack(self):
         self.print_attack_msg()
+        self.reduce_energy(self.get_damage_list()[0])
 
     def handle_debate(self):
         self.print_debate_msg()
+        self.reduce_energy(self.get_damage_list()[1])
 
     def handle_reassurance(self):
         self.print_reassurance_msg()
+        self.reduce_energy(self.get_damage_list()[2])
 
 class Crab(Enemy):
     def __init__(self):

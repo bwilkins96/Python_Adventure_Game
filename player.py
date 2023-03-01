@@ -1,4 +1,4 @@
-# Player class
+# Player class for the Adventure Game project
 
 class Player:
     def __init__(self, name):
