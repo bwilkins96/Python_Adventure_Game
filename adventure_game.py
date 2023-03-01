@@ -107,7 +107,7 @@ class AdventureGame:
         print('Press "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
-        print(f'Hello {self.get_player().get_name()}!')
+        print(f'Hello Captain {self.get_player().get_name()}!')
 
         print('\nYou are on the beach of an uninhabited island searching for treasure.')
         print('You are not searching for just any treasure, this treasure is')
@@ -119,7 +119,7 @@ class AdventureGame:
         p = self.get_player()
         e = self.get_enemy()
 
-        status = f'\n{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
+        status = f'\nCaptain {p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
         print(status)
         print('-'*len(status))
     
@@ -134,7 +134,7 @@ class AdventureGame:
         player = self.get_player()
 
         if encounter == 'Pages':
-            num_pages = randrange(1, 10)
+            num_pages = randrange(1, 15)
             player.add_trinket(num_pages)
 
             if num_pages == 1:
@@ -157,9 +157,18 @@ class AdventureGame:
                 if enemy.get_energy() > 0: 
                     enemy.attack_player(player)
 
+                if player.get_energy() <= 0:
+                    self.print_battle_status()
+                    player.handle_defeat()
+                    self.clear_terminal()
+
                 self.print_battle_status()
             
-            enemy.print_outro()
+            if player.get_energy() > 0:
+                enemy.print_outro()
+            else:
+                self.end_game()
+
             self.current_enemy = None
 
     def handle_move(self):
@@ -191,7 +200,7 @@ class AdventureGame:
             self.end_game()
     
     def handle_treasure(self):
-        print('\nYou find a rock with an engraving of an "X".')
+        print('You find a rock with an engraving of an "X".')
         input('This must be the spot! Press <enter> to continue.')
 
         input('\nYou pull out your trusty shovel. Press <enter> to dig.')

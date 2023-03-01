@@ -68,7 +68,7 @@ class Enemy:
     def attack_player(self, player):
         print(self.get_attacker_msg())
 
-        if self.get_name == 'Botzmann Brain':
+        if self.get_name() == 'Botzmann Brain':
             player.reduce_energy(20)
         else:
             player.reduce_energy(10)
