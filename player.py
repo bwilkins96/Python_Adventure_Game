@@ -2,7 +2,7 @@
 
 class Player:
     def __init__(self, name):
-        self.name = name
+        self.name = f'Captain {name}'.title()
         self.energy = 100
         self.pages = 0
     
@@ -32,7 +32,7 @@ class Player:
     
     def look_behind(self):
         print('\nYou look behind you and see the crashing waves of the ocean,')
-        print(f'as well as the ship you came here on, the Ship of {self.name.capitalize()}!')
+        print(f'as well as the ship you came here on, the Ship of {self.name.title()}!')
         print('If you replaced every piece of your ship over time, would it be the same ship?\n')
 
     def attack_enemy(self, enemy, choice):
