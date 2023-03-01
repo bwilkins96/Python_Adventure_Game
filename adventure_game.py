@@ -42,8 +42,13 @@ class AdventureGame:
     def set_up_player(self):
         while True:
             name = input('\nWhat is your name? ')
-            if len(name) > 0: break
-            print('You didn\'t enter anything! :)')
+            
+            if len(name) == 0:
+                print('You didn\'t enter anything! :)')
+            elif len(name) > 50:
+                print('That\'s a really long name! Please enter something shorter. :)')
+            else:
+                break
 
         self.player = Player(name)
     
@@ -114,8 +119,9 @@ class AdventureGame:
         p = self.get_player()
         e = self.get_enemy()
 
-        print(f'\n{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy')
-        print('-'*54)
+        status = f'\n{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
+        print(status)
+        print('-'*len(status))
 
     def handle_step(self):
         print('\nYou take a step forward.')
