@@ -101,7 +101,7 @@ class AdventureGame:
         print('-'*29)
 
     def print_help(self):
-        print('\nPress "w" to take a step, "s" to check your status, "l" to look behind you, or "q" to quit')
+        print('Press "w" to start walking, "s" to check your status, "l" to look behind you, or "q" to quit')
 
     def print_attack_help(self):
         print('Press "a" to attack, "d" to debate, or "r" to reassure')
@@ -122,9 +122,13 @@ class AdventureGame:
         status = f'\n{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
         print(status)
         print('-'*len(status))
+    
+    def clear_terminal(self, wait=False):
+        if wait: input('\nPress <enter> to continue.')
+        print('\033c', end='')
 
     def handle_step(self):
-        print('\nYou take a step forward.')
+        print('\nYou begin walking forward.')
 
         encounter = self.get_random_choice()
         player = self.get_player()
@@ -147,6 +151,7 @@ class AdventureGame:
                 self.print_attack_help()
                 choice = self.get_attack_choice()      
                 if choice == 'q': self.end_game(); break
+                self.clear_terminal()
 
                 player.attack_enemy(enemy, choice)
                 if enemy.get_energy() > 0: 
@@ -158,13 +163,12 @@ class AdventureGame:
             self.current_enemy = None
 
     def handle_move(self):
-        if self.get_moves() == 10:
-            self.print_help()
-        elif self.get_moves() > 1:
-            print(f'\nAccording to your map, you are {self.get_moves()} steps away from the treasure.')
+        if self.get_moves() > 1:
+            print(f'\nAccording to your map, you are {self.get_moves()} moves away from the treasure.')
         else:
-            print('\nAccording to your map, you are only 1 step away from the treasure!')
-
+            print('\nAccording to your map, you are only 1 move away from the treasure!')
+        
+        self.print_help()
         while True:
             try:
                 choice = input('What do you do ("h" for help)? ')[0].lower()
@@ -179,16 +183,15 @@ class AdventureGame:
                 self.print_help()
 
             if choice in ['w','q']: break
-        
-        #print('\033c', end='')
 
         if choice == 'w':
             self.handle_step()
+            self.clear_terminal(not self.is_game_over())
         else:
             self.end_game()
     
     def handle_treasure(self):
-        print('You find a rock with an engraving of an "X".')
+        print('\nYou find a rock with an engraving of an "X".')
         input('This must be the spot! Press <enter> to continue.')
 
         input('\nYou pull out your trusty shovel. Press <enter> to dig.')
@@ -199,13 +202,14 @@ class AdventureGame:
 
         print('\nYou break a lock and open the chest!')
         print('Within is lots of gold coins...')
-        print('However, you don\'t see anything related to the meaning of life')
+        print('However, you don\'t see anything related to the meaning of life.')
         input('Press <enter> to investigate further.')
         
         print('\nYou reach into the sea of gold coins and pull out a scroll!')
         input('Press <enter> to open the scroll.')
 
         print('\nYou awaken in your bed, realizing that it was just a dream.')
+        self.clear_terminal(True)
 
     def run(self):
         self.print_header()
