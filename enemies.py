@@ -29,6 +29,9 @@ class Enemy:
     
     def reduce_energy(self, amt):
         self.energy -= amt
+
+        if self.energy < 0:
+            self.energy = 0
     
     def print_intro(self):
         for line in self.introduction:
@@ -61,11 +64,15 @@ class Enemy:
     def handle_reassurance(self):
         self.print_reassurance_msg()
         self.reduce_energy(self.get_damage_list()[2])
+    
+    def attack_player(self, player):
+        print(self.get_attacker_msg())
+        player.reduce_energy(10)
 
 class Crab(Enemy):
     def __init__(self):
         intro = ['\nA crab approaches you!']
-        outro = ['\nThe tired crab scurries away.']
+        outro = ['The tired crab scurries away.']
         a_msg = []
         d_msg = []
         r_msg = []
@@ -81,7 +88,7 @@ class Philosopher(Enemy):
             'buried treasure! It\'s unnecessary, you see, because I already know what',
             'the meaning of life is!"'
             ]
-        outro = ['\nThe philosopher is too tired to continue trying to convince you.',
+        outro = ['The philosopher is too tired to continue trying to convince you.',
                  'They walk away slowly, saying something about Plato\'s allegory of the cave.'
             ]
         a_msg = []
@@ -98,7 +105,7 @@ class ExistentialCrisis(Enemy):
             '\nYou are plagued by an existential crisis! What if you discover that',
             'you\'re current beliefs are wrong?'
             ] 
-        outro = ['\nYou are relieved of your existential crisis!']
+        outro = ['You are relieved of your existential crisis!']
         a_msg = []
         d_msg = []
         r_msg = []
@@ -115,7 +122,7 @@ class BoltzmannBrain(Enemy):
             'pop into existence and I\'m going to stop you!',
             '\nYou\'re not sure how any of this is even possible.'
             ]
-        outro = ['\nThe Boltzmann brain vanishes from existence.',
+        outro = ['The Boltzmann brain vanishes from existence.',
                 'You\'re still confused by the whole encounter.'     
             ]
         a_msg = []

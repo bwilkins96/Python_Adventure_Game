@@ -18,6 +18,9 @@ class Player:
     def reduce_energy(self, amt):
         self.energy -= amt
 
+        if self.energy < 0:
+            self.energy = 0
+
     def add_energy(self, amt):
         self.energy += amt
 

@@ -85,6 +85,7 @@ class AdventureGame:
             if choice in ['a', 'd', 'r']:
                 break
             elif choice == 'h':
+                print()
                 self.print_attack_help()
 
         return choice
@@ -98,7 +99,7 @@ class AdventureGame:
         print('\nPress "w" to take a step, "s" to check your status, "l" to look behind you, or "q" to quit')
 
     def print_attack_help(self):
-        print('\nPress "a" to attack, "d" to debate, or "r" to reassure')
+        print('Press "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
         print(f'Hello {self.get_player().get_name()}!')
@@ -113,7 +114,8 @@ class AdventureGame:
         p = self.get_player()
         e = self.get_enemy()
 
-        print(f'{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy')
+        print(f'\n{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy')
+        print('-'*54)
 
     def handle_step(self):
         print('\nYou take a step forward.')
@@ -134,12 +136,18 @@ class AdventureGame:
             enemy = self.get_enemy()
             enemy.print_intro()
 
+            self.print_battle_status()
             while not self.is_battle_over():
                 self.print_attack_help()
                 choice = self.get_attack_choice()
                 player.attack_enemy(enemy, choice)
-                self.print_battle_status()
 
+                if enemy.get_energy() > 0:
+                    enemy.attack_player(player)
+
+                self.print_battle_status()
+            
+            enemy.print_outro()
             self.current_enemy = None
 
     def handle_move(self):
