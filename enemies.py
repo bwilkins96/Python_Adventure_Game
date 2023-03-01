@@ -119,8 +119,8 @@ class BoltzmannBrain(Enemy):
         intro = [
             '\nSuprisingly, a floating Boltzmann brain approaches you!',
             'It says to you, from within your own brain, "Yes, I did spontaneously',
-            'pop into existence and I\'m going to stop you!',
-            '\nYou\'re not sure how any of this is even possible.'
+            'pop into existence and I\'m going to stop you!"',
+            'You\'re not sure how any of this is even possible.'
             ]
         outro = ['The Boltzmann brain vanishes from existence.',
                 'You\'re still confused by the whole encounter.'     

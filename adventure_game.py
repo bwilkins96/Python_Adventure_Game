@@ -82,7 +82,7 @@ class AdventureGame:
             if len(choice) > 0:
                 choice = choice[0].lower()
 
-            if choice in ['a', 'd', 'r']:
+            if choice in ['a', 'd', 'r', 'q']:
                 break
             elif choice == 'h':
                 print()
@@ -139,10 +139,11 @@ class AdventureGame:
             self.print_battle_status()
             while not self.is_battle_over():
                 self.print_attack_help()
-                choice = self.get_attack_choice()
-                player.attack_enemy(enemy, choice)
+                choice = self.get_attack_choice()      
+                if choice == 'q': self.end_game(); break
 
-                if enemy.get_energy() > 0:
+                player.attack_enemy(enemy, choice)
+                if enemy.get_energy() > 0: 
                     enemy.attack_player(player)
 
                 self.print_battle_status()
