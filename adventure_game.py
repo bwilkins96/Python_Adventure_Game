@@ -13,6 +13,7 @@ class AdventureGame:
             'Pages', 'Crab', 'Philosopher', 'Existential', 'Botzmann'
         ]
         self.current_enemy = None
+        self.player = None
     
     def get_moves(self):
         return self.moves
@@ -25,12 +26,18 @@ class AdventureGame:
     
     def get_enemy(self):
         return self.current_enemy
+
+    def get_player(self):
+        return self.player
     
     def decrement_moves(self):
         self.moves -= 1
 
     def end_game(self):
         self.game_over = True
+
+    def is_battle_over(self):
+        return not (self.get_enemy().get_energy() > 0 and self.get_player().get_energy() > 0)
     
     def set_up_player(self):
         while True:
@@ -94,7 +101,7 @@ class AdventureGame:
         print('\nPress "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
-        print(f'Hello {self.player.get_name()}!')
+        print(f'Hello {self.get_player().get_name()}!')
 
         print('\nYou are on the beach of an uninhabited island searching for treasure.')
         print('You are not searching for just any treasure, this treasure is')
@@ -102,14 +109,21 @@ class AdventureGame:
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
         print('as well as lots of gold!')
 
+    def print_battle_status(self):
+        p = self.get_player()
+        e = self.get_enemy()
+
+        print(f'{p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy')
+
     def handle_step(self):
         print('\nYou take a step forward.')
 
         encounter = self.get_random_choice()
+        player = self.get_player()
 
         if encounter == 'Pages':
             num_pages = randrange(1, 10)
-            self.player.add_trinket(num_pages)
+            player.add_trinket(num_pages)
 
             if num_pages == 1:
                 print('You found a page.')
@@ -117,11 +131,14 @@ class AdventureGame:
                 print(f'You found {num_pages} pages.')
         else:
             self.set_up_enemy(encounter)
-            self.current_enemy.print_intro()
+            enemy = self.get_enemy()
+            enemy.print_intro()
 
-            self.print_attack_help()
-            choice = self.get_attack_choice()
-            self.player.attack_enemy(self.get_enemy(), choice)
+            while not self.is_battle_over():
+                self.print_attack_help()
+                choice = self.get_attack_choice()
+                player.attack_enemy(enemy, choice)
+                self.print_battle_status()
 
             self.current_enemy = None
 
@@ -140,9 +157,9 @@ class AdventureGame:
                 choice = ''
 
             if choice == 's':
-                self.player.print_status()
+                self.get_player().print_status()
             elif choice == 'l':
-                self.player.look_behind()
+                self.get_player().look_behind()
             elif choice == 'h':
                 self.print_help()
 
