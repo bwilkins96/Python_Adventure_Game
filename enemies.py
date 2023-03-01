@@ -76,7 +76,7 @@ class Crab(Enemy):
         a_msg = []
         d_msg = []
         r_msg = []
-        a_msg_2 = ''
+        a_msg_2 = 'The crab snaps at you with its claws, reducing your energy by 10.'
         dmg_list = [50, 0, 10]
 
         super().__init__('Crab', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
@@ -88,13 +88,14 @@ class Philosopher(Enemy):
             'buried treasure! It\'s unnecessary, you see, because I already know what',
             'the meaning of life is!"'
             ]
-        outro = ['The philosopher is too tired to continue trying to convince you.',
-                 'They walk away slowly, saying something about Plato\'s allegory of the cave.'
+        outro = [
+            'The philosopher is too tired to continue trying to convince you.',
+            'They walk away slowly, saying something about Plato\'s allegory of the cave.'
             ]
         a_msg = []
         d_msg = []
         r_msg = []
-        a_msg_2 = ''
+        a_msg_2 = 'The philosopher makes nonstop arguments for their position,\nreducing your energy by 10.'
         dmg_list = [10, 50, 0]
 
         super().__init__('Philosopher', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
@@ -109,7 +110,7 @@ class ExistentialCrisis(Enemy):
         a_msg = []
         d_msg = []
         r_msg = []
-        a_msg_2 = ''
+        a_msg_2 = 'The existential crisis keeps pestering you, reducing your energy by 10.'
         dmg_list = [0, 10, 50]
 
         super().__init__('Existential Crisis', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
@@ -122,13 +123,14 @@ class BoltzmannBrain(Enemy):
             'pop into existence and I\'m going to stop you!"',
             'You\'re not sure how any of this is even possible.'
             ]
-        outro = ['The Boltzmann brain vanishes from existence.',
-                'You\'re still confused by the whole encounter.'     
+        outro = [
+            'The Boltzmann brain vanishes from existence.',
+            'You\'re still confused by the whole encounter.'     
             ]
         a_msg = []
         d_msg = []
         r_msg = []
-        a_msg_2 = ''
+        a_msg_2 = 'The floating brain hits you with psychic waves emmiting out of it,\nreducing your energy by 10.'
         dmg_list = [20, 100, 0]
 
         super().__init__('Botzmann Brain', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
