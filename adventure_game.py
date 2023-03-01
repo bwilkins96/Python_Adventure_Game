@@ -113,7 +113,7 @@ class AdventureGame:
         print('You are not searching for just any treasure, this treasure is')
         print('rumored to contain the answers to one of life\'s greatest mysteries.')
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
-        print('as well as lots of gold!')
+        print('as well as lots of gold!\n')
 
     def print_battle_status(self):
         p = self.get_player()
@@ -138,9 +138,9 @@ class AdventureGame:
             player.add_trinket(num_pages)
 
             if num_pages == 1:
-                print('You found a page.')
+                print('You find a page.')
             else:
-                print(f'You found {num_pages} pages.')
+                print(f'You find {num_pages} pages.')
         else:
             self.set_up_enemy(encounter)
             enemy = self.get_enemy()
@@ -164,9 +164,9 @@ class AdventureGame:
 
     def handle_move(self):
         if self.get_moves() > 1:
-            print(f'\nAccording to your map, you are {self.get_moves()} moves away from the treasure.')
+            print(f'According to your map, you are {self.get_moves()} moves away from the treasure.')
         else:
-            print('\nAccording to your map, you are only 1 move away from the treasure!')
+            print('According to your map, you are only 1 move away from the treasure!')
         
         self.print_help()
         while True:

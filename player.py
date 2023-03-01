@@ -27,6 +27,12 @@ class Player:
     def add_trinket(self, amt):
         self.pages += amt
     
+    def reduce_trinket(self, amt):
+        self.pages -= amt
+
+        if self.pages < 0:
+            self.pages = 0
+    
     def print_status(self):
         print(f'\n{self.get_name()} | Energy: {self.get_energy()}, Pages: {self.get_trinket_count()}\n')
     
