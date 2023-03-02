@@ -127,7 +127,7 @@ class AdventureGame:
         print('-'*len(status))
     
     def clear_terminal(self, wait=False):
-        if wait: input('\nPress <enter> to continue.')
+        if wait: input('\nPress <enter> to continue. ')
         print('\033c', end='')
 
     def handle_player_defeat(self):
@@ -213,21 +213,21 @@ class AdventureGame:
     
     def handle_treasure(self):
         print('You find a rock with an engraving of an "X".')
-        input('This must be the spot! Press <enter> to continue.')
+        input('This must be the spot! Press <enter> to continue. ')
 
         input('\nYou pull out your trusty shovel. Press <enter> to dig.')
         input('You start digging. Press <enter> to dig.')
         input('You hit the top of something with your shovel. Press <enter> to dig.')
         print('You uncover a treasure chest and pull it out of the hole.')
-        input('Press <enter> to open the chest.')
+        input('Press <enter> to open the chest. ')
 
         print('\nYou break a lock and open the chest!')
         print('Within is lots of gold coins...')
         print('However, you don\'t see anything related to the meaning of life.')
-        input('Press <enter> to investigate further.')
+        input('Press <enter> to investigate further. ')
         
         print('\nYou reach into the sea of gold coins and pull out a scroll!')
-        input('Press <enter> to open the scroll.')
+        input('Press <enter> to open the scroll. ')
 
         print('\nYou awaken in your bed, realizing that it was just a dream.')
         self.clear_terminal(True)

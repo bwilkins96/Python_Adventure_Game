@@ -65,7 +65,7 @@ class Player:
         print('Your energy has been reduced to zero!')
 
         if (not self.has_used_chance()) and (self.get_trinket_count() >= 5):
-            input('\nPress <enter> to continue.')
+            input('\nPress <enter> to continue. ')
             print('\nYou are laying in the sand when you have an idea!')
             print('You have collected a number of pages and reading them should bring your energy back up.')
             input_val = input('Press <enter> to read all of your pages or "q" to quit. ')
@@ -83,7 +83,7 @@ class Player:
         elif self.has_used_chance():
             print('Unfortunatley, you are so tired that reading more philosophy will not help.')
         
-        input('\nPress <enter> to continue.')
+        input('\nPress <enter> to continue. ')
 
     def print_end_personal(self):
         energy = self.get_energy()
