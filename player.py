@@ -28,6 +28,9 @@ class Player:
     def add_energy(self, amt):
         self.energy += amt
 
+        if self.energy > 100:
+            self.energy = 100
+
     def add_trinket(self, amt):
         self.pages += amt
     
@@ -56,21 +59,23 @@ class Player:
     def handle_defeat(self):
         print('Your energy has been reduced to zero!')
 
-        if (not self.has_used_chance()) and (self.get_trinket_count() >= 10):
-            input('Press <enter> to continue.')
+        if (not self.has_used_chance()) and (self.get_trinket_count() >= 5):
+            input('\nPress <enter> to continue.')
             print('\nYou are laying in the sand when you have an idea!')
-            print('You have collected plenty of pages and reading some should bring your energy back up.')
-            input('Press <enter> to read 10 pages.')
+            print('You have collected a number of pages and reading them should bring your energy back up.')
+            input_val = input('Press <enter> to read all of your pages or "q" to quit. ')
 
-            self.reduce_trinket(10)
-            self.add_energy(100)
+            if len(input_val) > 0 and input_val[0].lower() == 'q': return
 
-            print('\nYou read 10 pages, each containing a philosophy essay.')
-            print('This brings your energy back up to 100.')
+            print(f'\nYou read all {self.get_trinket_count()} of your pages, each containing a philosophy essay.')
+            print('A gust of wind blows your pages away, but your energy is back up to 100.')
             print('You get the feeling you will only be able to do that once.')
+
+            self.reduce_trinket(self.get_trinket_count())
+            self.add_energy(100)
 
             self.used_second_chance = True 
         elif self.has_used_chance():
             print('Unfortunatley, you are so tired that reading more philosophy will not help.')
         
-        input('Press <enter> to continue.')
+        input('\nPress <enter> to continue.')

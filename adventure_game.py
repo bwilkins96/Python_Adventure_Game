@@ -45,7 +45,7 @@ class AdventureGame:
             
             if len(name) == 0:
                 print('You didn\'t enter anything! :)')
-            elif len(name) > 50:
+            elif len(name) > 35:
                 print('That\'s a really long name! Please enter something shorter. :)')
             else:
                 break
@@ -115,17 +115,24 @@ class AdventureGame:
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
         print('as well as lots of gold!\n')
 
-    def print_battle_status(self):
+    def print_battle_status(self, new_line=True):
         p = self.get_player()
         e = self.get_enemy()
 
-        status = f'\nCaptain {p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
+        if new_line: print()
+        status = f'Captain {p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
         print(status)
         print('-'*len(status))
     
     def clear_terminal(self, wait=False):
         if wait: input('\nPress <enter> to continue.')
         print('\033c', end='')
+
+    def handle_player_defeat(self):
+        self.print_battle_status()
+        self.get_player().handle_defeat()
+        self.clear_terminal()
+        self.print_battle_status(False)
 
     def handle_step(self):
         print('\nYou begin walking forward.')
@@ -134,7 +141,7 @@ class AdventureGame:
         player = self.get_player()
 
         if encounter == 'Pages':
-            num_pages = randrange(1, 15)
+            num_pages = randrange(1, 9)
             player.add_trinket(num_pages)
 
             if num_pages == 1:
@@ -158,11 +165,9 @@ class AdventureGame:
                     enemy.attack_player(player)
 
                 if player.get_energy() <= 0:
+                    self.handle_player_defeat()
+                else:
                     self.print_battle_status()
-                    player.handle_defeat()
-                    self.clear_terminal()
-
-                self.print_battle_status()
             
             if player.get_energy() > 0:
                 enemy.print_outro()
@@ -176,6 +181,10 @@ class AdventureGame:
             print(f'According to your map, you are {self.get_moves()} moves away from the treasure.')
         else:
             print('According to your map, you are only 1 move away from the treasure!')
+
+        if self.get_moves() == 5 and self.get_player().get_energy() < 100:
+            print('The thought of making it halfway to the treasure causes you to regain some energy!')
+            self.get_player().add_energy(25)
         
         self.print_help()
         while True:
