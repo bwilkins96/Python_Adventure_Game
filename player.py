@@ -6,6 +6,7 @@ class Player:
         self.energy = 100
         self.pages = 0
         self.used_second_chance = False
+        self.encounters = {}
     
     def get_name(self):
         return self.name
@@ -39,6 +40,10 @@ class Player:
 
         if self.pages < 0:
             self.pages = 0
+    
+    def add_encounter(self, name):
+        encounter = self.encounters.get(name, 0)
+        self.encounters[name] = encounter + 1
     
     def print_status(self):
         print(f'\n{self.get_name()} | Energy: {self.get_energy()}, Pages: {self.get_trinket_count()}\n')
@@ -95,6 +100,22 @@ class Player:
             pages = f'{pages} pages'
 
         print(f'At the end of your adventure, you had {energy} energy and {pages}.')
+
+        encounter_str = '\nYou encountered '
+        for enemy in self.encounters:
+            num_encountered = self.encounters[enemy]
+
+            if num_encountered == 1:
+                encounter_str += f'1 {enemy}'
+            else:
+                encounter_str += f'{num_encountered} {enemy}s'
+        
+        if len(encounter_str) == 17:
+            encounter_str += 'no enemies.'
+        else:
+            encounter_str += '.'
+        
+        print(encounter_str)
 
         if treasure_found:
             print('\nYou found the treasure and it had lots of gold inside!')

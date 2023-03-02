@@ -153,7 +153,7 @@ class BoltzmannBrain(Enemy):
         a_msg = ['You attack the floating brain, causing some reduction in its energy.']
         d_msg = [
             'You debate with the brain, pointing out the high improbability of its existence.',
-            'This seems to immediatley reduce the brain\'s energy to zero.'
+            'This seems to immediately reduce the brain\'s energy to zero.'
             ]
         r_msg = ['You attempt to reassure the floating brain, but it does not appear to appreciate your efforts.']
         a_msg_2 = '\nThe floating brain hits you with psychic waves emmiting out of it,\nreducing your energy by 20!'

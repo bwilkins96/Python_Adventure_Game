@@ -61,6 +61,8 @@ class AdventureGame:
             self.current_enemy = ExistentialCrisis()
         else:
             self.current_enemy = BoltzmannBrain()
+        
+        self.get_player().add_encounter(self.get_enemy().get_name())
     
     def get_random_choice(self):
         rand_val = random()
@@ -204,9 +206,10 @@ class AdventureGame:
 
         if choice == 'w':
             self.handle_step()
-            self.clear_terminal(not self.is_game_over())
         else:
             self.end_game()
+
+        self.clear_terminal(not self.is_game_over())
     
     def handle_treasure(self):
         print('You find a rock with an engraving of an "X".')
