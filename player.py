@@ -81,7 +81,20 @@ class Player:
         input('\nPress <enter> to continue.')
 
     def print_end_stats(self, treasure_found):
-        print(f'At the end of your adventure, you had {self.get_energy()} energy and {self.get_trinket_count()} pages.')
+        energy = self.get_energy()
+        pages = self.get_trinket_count()
+
+        if energy == 0: 
+            energy = 'no'
+
+        if pages == 0:
+            pages = 'no pages'
+        elif pages == 1:
+            pages = '1 page'
+        else:
+            pages = f'{pages} pages'
+
+        print(f'At the end of your adventure, you had {energy} energy and {pages}.')
 
         if treasure_found:
             print('\nYou found the treasure and it had lots of gold inside!')
