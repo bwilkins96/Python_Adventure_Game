@@ -84,8 +84,8 @@ class Player:
             print('Unfortunatley, you are so tired that reading more philosophy will not help.')
         
         input('\nPress <enter> to continue.')
-    
-    def print_end_stats(self, treasure_found):
+
+    def print_end_personal(self):
         energy = self.get_energy()
         pages = self.get_trinket_count()
 
@@ -100,7 +100,8 @@ class Player:
             pages = f'{pages} pages'
 
         print(f'At the end of your adventure, you had {energy} energy and {pages}.')
-
+    
+    def print_encounters(self):
         total_encounters = len(self.encounters.keys())
         encounter_str = '\nYou encountered '
 
@@ -139,7 +140,14 @@ class Player:
         
         encounter_str += '.'
         print(encounter_str)
+    
+    def print_end_stats(self, treasure_found):
+        self.print_end_personal()
+        self.print_encounters()
 
+        if self.has_used_chance():
+            print('\nYou read philosophy to regain energy when you were down.')
+        
         if treasure_found:
             print('\nYou found the treasure and it had lots of gold inside!')
             print('You found a scroll and upon opening it, awoke and realized it was all a dream.')
