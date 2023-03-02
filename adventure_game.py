@@ -229,6 +229,14 @@ class AdventureGame:
         print('\nYou awaken in your bed, realizing that it was just a dream.')
         self.clear_terminal(True)
 
+    def handle_end(self):
+        if self.get_moves() == 0:
+            self.get_player().print_end_stats(True)
+        else:
+            self.get_player().print_end_stats(False)
+
+        print('\nGAME OVER!')
+
     def run(self):
         self.print_header()
         self.set_up_player()
@@ -242,6 +250,6 @@ class AdventureGame:
                 self.handle_treasure()
                 self.end_game()
         
-        print('\nGAME OVER!')
-
+        self.handle_end()
+        
 if __name__ == '__main__': AdventureGame().run()

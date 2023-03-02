@@ -79,3 +79,12 @@ class Player:
             print('Unfortunatley, you are so tired that reading more philosophy will not help.')
         
         input('\nPress <enter> to continue.')
+
+    def print_end_stats(self, treasure_found):
+        print(f'At the end of your adventure, you had {self.get_energy()} energy and {self.get_trinket_count()} pages.')
+
+        if treasure_found:
+            print('\nYou found the treasure and it had lots of gold inside!')
+            print('You found a scroll and upon opening it, awoke and realized it was all a dream.')
+        else:
+            print('\nYou did not find the treasure!')
