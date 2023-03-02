@@ -125,6 +125,8 @@ class AdventureGame:
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
         print('as well as lots of gold!\n')
 
+        self.clear_terminal(True)
+
     def print_battle_status(self, new_line=True):
         p = self.get_player()
         e = self.get_enemy()
