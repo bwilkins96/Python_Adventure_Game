@@ -41,7 +41,7 @@ class AdventureGame:
     
     def set_up_player(self):
         while True:
-            name = input('\nWhat is your name? ')
+            name = input('\nWhat is your name (<enter> to submit)? ')
             
             if len(name) == 0:
                 print('You didn\'t enter anything! :)')
@@ -92,7 +92,6 @@ class AdventureGame:
             if choice in ['a', 'd', 'r', 'q']:
                 break
             elif choice == 'h':
-                print()
                 self.print_attack_help(True)
 
         return choice
@@ -102,11 +101,19 @@ class AdventureGame:
         print('Welcome to my Adventure Game!')
         print('-'*29)
 
-    def print_help(self):
+    def print_help(self, additional=False):
+        if additional:
+            print('\nWhen you take a move, there is a chance of encountering enemies')
+            print('and possibly finding other interesting things.')
+            print('Be sure to keep an eye on your energy and try not to let it get too low.\n')
+
         print('Press "w" to start walking, "s" to check your status, "l" to look behind you, or "q" to quit')
 
-    def print_attack_help(self, q_msg=False):
-        if q_msg: print('"q" ends the game')
+    def print_attack_help(self, additional=False):
+        if additional:
+            print('\nTry different options on enemies to figure out the best response!')
+            print('"q" still ends the game when in a battle.\n')
+
         print('Press "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
@@ -201,8 +208,7 @@ class AdventureGame:
             elif choice == 'l':
                 self.get_player().look_behind()
             elif choice == 'h':
-                print()
-                self.print_help()
+                self.print_help(True)
 
             if choice in ['w','q']: break
 
