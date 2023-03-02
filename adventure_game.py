@@ -105,7 +105,7 @@ class AdventureGame:
         if additional:
             print('\nWhen you take a move, there is a chance of encountering enemies')
             print('and possibly finding other interesting things.')
-            print('Be sure to keep an eye on your energy and try not to let it get too low.\n')
+            print('If attacked, try not to let your energy get too low.\n')
 
         print('Press "w" to start walking, "s" to check your status, "l" to look behind you, or "q" to quit')
 
@@ -123,7 +123,7 @@ class AdventureGame:
         print('You are not searching for just any treasure, this treasure is')
         print('rumored to contain the answers to one of life\'s greatest mysteries.')
         print('This treasure is rumored to contain answers pertaining to the meaning of life,')
-        print('as well as lots of gold!\n')
+        print('as well as lots of gold!')
 
         self.clear_terminal(True)
 
@@ -157,9 +157,9 @@ class AdventureGame:
             player.add_trinket(num_pages)
 
             if num_pages == 1:
-                print('You find a page.')
+                print('\nYou find a page.')
             else:
-                print(f'You find {num_pages} pages.')
+                print(f'\nYou find {num_pages} pages.')
         else:
             self.set_up_enemy(encounter)
             enemy = self.get_enemy()
@@ -242,7 +242,7 @@ class AdventureGame:
         print('\nYou awaken in your bed, realizing that it was just a dream.')
         self.clear_terminal(True)
 
-    def handle_end(self):
+    def handle_game_over(self):
         if self.get_moves() == 0:
             self.get_player().print_end_stats(True)
         else:
@@ -263,6 +263,6 @@ class AdventureGame:
                 self.handle_treasure()
                 self.end_game()
         
-        self.handle_end()
+        self.handle_game_over()
         
 if __name__ == '__main__': AdventureGame().run()
