@@ -84,7 +84,7 @@ class Player:
             print('Unfortunatley, you are so tired that reading more philosophy will not help.')
         
         input('\nPress <enter> to continue.')
-
+    
     def print_end_stats(self, treasure_found):
         energy = self.get_energy()
         pages = self.get_trinket_count()
@@ -101,20 +101,43 @@ class Player:
 
         print(f'At the end of your adventure, you had {energy} energy and {pages}.')
 
+        total_encounters = len(self.encounters.keys())
         encounter_str = '\nYou encountered '
+
+        count = 1
         for enemy in self.encounters:
             num_encountered = self.encounters[enemy]
 
+            enemy_name = enemy.lower()
+            if enemy_name[0] == 'b': 
+                enemy_name = enemy_name.capitalize()
+            
+            if count == total_encounters and count > 1: 
+                encounter_str += 'and '
+
             if num_encountered == 1:
-                encounter_str += f'1 {enemy}'
+                encounter_str += f'1 {enemy_name}'
             else:
-                encounter_str += f'{num_encountered} {enemy}s'
+                if enemy_name[0] == 'e':
+                    enemy_name = enemy_name[:len(enemy_name)-2] + 'e'
+                
+                encounter_str += f'{num_encountered} {enemy_name}s'
+            
+            if total_encounters > 2:
+                encounter_str += ', '
+            else:
+                encounter_str += ' '
+
+            count += 1
         
-        if len(encounter_str) == 17:
-            encounter_str += 'no enemies.'
+        if total_encounters == 0:
+            encounter_str += 'no enemies'
+        elif total_encounters <= 2:
+            encounter_str = encounter_str[:len(encounter_str)-1]
         else:
-            encounter_str += '.'
+            encounter_str = encounter_str[:len(encounter_str)-2]
         
+        encounter_str += '.'
         print(encounter_str)
 
         if treasure_found:
