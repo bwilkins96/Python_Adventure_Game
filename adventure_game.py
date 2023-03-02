@@ -93,7 +93,7 @@ class AdventureGame:
                 break
             elif choice == 'h':
                 print()
-                self.print_attack_help()
+                self.print_attack_help(True)
 
         return choice
 
@@ -105,7 +105,8 @@ class AdventureGame:
     def print_help(self):
         print('Press "w" to start walking, "s" to check your status, "l" to look behind you, or "q" to quit')
 
-    def print_attack_help(self):
+    def print_attack_help(self, q_msg=False):
+        if q_msg: print('"q" ends the game')
         print('Press "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
@@ -200,6 +201,7 @@ class AdventureGame:
             elif choice == 'l':
                 self.get_player().look_behind()
             elif choice == 'h':
+                print()
                 self.print_help()
 
             if choice in ['w','q']: break
