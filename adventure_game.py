@@ -164,8 +164,9 @@ class AdventureGame:
             self.set_up_enemy(encounter)
             enemy = self.get_enemy()
             enemy.print_intro()
+            self.clear_terminal(True)
 
-            self.print_battle_status()
+            self.print_battle_status(False)
             while not self.is_battle_over():
                 self.print_attack_help()
                 choice = self.get_attack_choice()      
