@@ -3,7 +3,7 @@
 
 from random import random, randrange
 from player import Player
-from enemies import Enemy, Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
+from enemies import Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
 
 class AdventureGame:
     def __init__(self):
