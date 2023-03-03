@@ -119,7 +119,7 @@ class ExistentialCrisis(Enemy):
     def __init__(self):
         intro = [
             '\nYou are plagued by an existential crisis! What if you discover that',
-            'you\'re current beliefs are wrong?'
+            'your current beliefs are wrong?'
             ] 
         outro = ['You are relieved of your existential crisis!']
         a_msg = [

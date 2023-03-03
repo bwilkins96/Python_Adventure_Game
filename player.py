@@ -48,10 +48,16 @@ class Player:
     def print_status(self):
         print(f'\n{self.get_name()} | Energy: {self.get_energy()}, Pages: {self.get_trinket_count()}\n')
     
-    def look_behind(self):
+    def look_behind(self, moves):
         print('\nYou look behind you and see the crashing waves of the ocean,')
         print(f'as well as the ship you came here on, the Ship of {self.get_name()}!')
         print('If you replaced every piece of your ship over time, would it be the same ship?\n')
+
+        moves_taken = 10 - moves
+        if moves_taken == 1:
+            print('You also see your footprints from the previous move.\n')
+        elif moves_taken > 1:
+            print(f'You also see your footprints from the previous {moves_taken} moves.\n')
 
     def attack_enemy(self, enemy, choice):
         if choice == 'a':

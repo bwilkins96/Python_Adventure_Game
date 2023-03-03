@@ -208,7 +208,7 @@ class AdventureGame:
             if choice == 's':
                 self.get_player().print_status()
             elif choice == 'l':
-                self.get_player().look_behind()
+                self.get_player().look_behind(self.get_moves())
             elif choice == 'h':
                 self.print_help(True)
 
@@ -225,9 +225,9 @@ class AdventureGame:
         print('You find a rock with an engraving of an "X".')
         input('This must be the spot! Press <enter> to continue. ')
 
-        input('\nYou pull out your trusty shovel. Press <enter> to dig.')
-        input('You start digging. Press <enter> to dig.')
-        input('You hit the top of something with your shovel. Press <enter> to dig.')
+        input('\nYou pull out your trusty shovel. Press <enter> to dig. ')
+        input('You start digging. Press <enter> to dig. ')
+        input('You hit the top of something with your shovel. Press <enter> to dig. ')
         print('You uncover a treasure chest and pull it out of the hole.')
         input('Press <enter> to open the chest. ')
 
