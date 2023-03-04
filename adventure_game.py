@@ -1,6 +1,7 @@
 # Adventure Game project designed for Maryville University
 # SWDV 600: Intro to Programming
 
+from os import system, name as os_name
 from random import random, randrange
 from player import Player
 from enemies import Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
@@ -14,22 +15,22 @@ class AdventureGame:
         ]
         self.current_enemy = None
         self.player = None
-    
+
     def get_moves(self):
         return self.moves
-    
+
     def is_game_over(self):
         return self.game_over
-    
+
     def get_encounters(self):
         return self.possible_encounters
-    
+
     def get_enemy(self):
         return self.current_enemy
 
     def get_player(self):
         return self.player
-    
+
     def decrement_moves(self):
         self.moves -= 1
 
@@ -38,11 +39,11 @@ class AdventureGame:
 
     def is_battle_over(self):
         return not (self.get_enemy().get_energy() > 0 and self.get_player().get_energy() > 0)
-    
+
     def set_up_player(self):
         while True:
             name = input('\nWhat is your name (<enter> to submit)? ')
-            
+
             if len(name) == 0:
                 print('You didn\'t enter anything! :)')
             elif len(name) > 35:
@@ -51,7 +52,7 @@ class AdventureGame:
                 break
 
         self.player = Player(name)
-    
+
     def set_up_enemy(self, type):
         if type == 'Crab':
             self.current_enemy = Crab()
@@ -61,9 +62,9 @@ class AdventureGame:
             self.current_enemy = ExistentialCrisis()
         else:
             self.current_enemy = BoltzmannBrain()
-        
+
         self.get_player().add_encounter(self.get_enemy().get_name())
-    
+
     def get_random_choice(self):
         rand_val = random()
 
@@ -77,15 +78,15 @@ class AdventureGame:
             choice = 3
         else:
             choice = 4
-        
+
         return self.get_encounters()[choice]
-    
+
     def get_attack_choice(self):
         enemy_name = self.current_enemy.get_name().lower()
 
         while True:
             choice = input(f'What do you do about the {enemy_name} ("h" for help)? ')
-            
+
             if len(choice) > 0:
                 choice = choice[0].lower()
 
@@ -135,10 +136,16 @@ class AdventureGame:
         status = f'Captain {p.get_name()}: {p.get_energy()} energy  |  {e.get_name()}: {e.get_energy()} energy'
         print(status)
         print('-'*len(status))
-    
+
     def clear_terminal(self, wait=False):
         if wait: input('\nPress <enter> to continue. ')
-        print('\033c', end='')
+
+        if os_name == 'nt':
+            system('cls')
+        else:
+            system('clear')
+
+        #print('\033c', end='')
 
     def handle_player_defeat(self):
         self.print_battle_status()
@@ -169,19 +176,19 @@ class AdventureGame:
             self.print_battle_status(False)
             while not self.is_battle_over():
                 self.print_attack_help()
-                choice = self.get_attack_choice()      
+                choice = self.get_attack_choice()
                 if choice == 'q': self.end_game(); break
                 self.clear_terminal()
 
                 player.attack_enemy(enemy, choice)
-                if enemy.get_energy() > 0: 
+                if enemy.get_energy() > 0:
                     enemy.attack_player(player)
 
                 if player.get_energy() <= 0:
                     self.handle_player_defeat()
                 else:
                     self.print_battle_status()
-            
+
             if player.get_energy() > 0:
                 enemy.print_outro()
             else:
@@ -198,12 +205,12 @@ class AdventureGame:
         if self.get_moves() == 5 and self.get_player().get_energy() < 100:
             print('The thought of making it halfway to the treasure causes you to regain some energy!')
             self.get_player().add_energy(25)
-        
+
         self.print_help()
         while True:
             try:
                 choice = input('What do you do ("h" for help)? ')[0].lower()
-            except: 
+            except:
                 choice = ''
 
             if choice == 's':
@@ -221,7 +228,7 @@ class AdventureGame:
             self.end_game()
 
         self.clear_terminal(not self.is_game_over())
-    
+
     def handle_treasure(self):
         print('You find a rock with an engraving of an "X".')
         input('This must be the spot! Press <enter> to continue. ')
@@ -236,7 +243,7 @@ class AdventureGame:
         print('Within is lots of gold coins...')
         print('However, you don\'t see anything related to the meaning of life.')
         input('Press <enter> to investigate further. ')
-        
+
         print('\nYou reach into the sea of gold coins and pull out a scroll!')
         input('Press <enter> to open the scroll. ')
 
@@ -263,7 +270,7 @@ class AdventureGame:
             else:
                 self.handle_treasure()
                 self.end_game()
-        
+
         self.handle_game_over()
-        
+
 if __name__ == '__main__': AdventureGame().run()
