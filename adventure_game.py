@@ -170,14 +170,24 @@ class AdventureGame:
         print('-'*len(status))
 
     def clear_terminal(self, wait=False):
+        """
+        Clears the terminal screen
+        Uses the wait parameter to determine whether to first prompt user for input
+        """
         if wait: input('\nPress <enter> to continue. ')
 
         if os_name == 'nt':
+            # Windows
             system('cls')
         else:
+            # Linux or Mac
             system('clear')
 
+        # Prints extra line
         print()
+
+        # NOTE: This function does not clear the shell when run in Thonny
+        # This function should work properly when run in a terminal!
 
     def handle_player_defeat(self):
         self.print_battle_status()
