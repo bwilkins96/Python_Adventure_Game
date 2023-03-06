@@ -1,6 +1,8 @@
 # Adventure Game project designed for Maryville University
 # SWDV 600: Intro to Programming
 
+# Running this file produces and runs an Adventure Game instance
+
 from os import system, name as os_name
 from random import random, randrange
 from player import Player
@@ -190,18 +192,23 @@ class AdventureGame:
         # This function should work properly when run in a terminal!
 
     def handle_player_defeat(self):
-        self.print_battle_status()
+        "Handles player energy hitting zero during a battle"
         self.get_player().handle_defeat()
-        self.clear_terminal()
-        self.print_battle_status(False)
+
+        # Handles player revive
+        if self.get_player().get_energy() > 0:
+            self.clear_terminal()
+            self.print_battle_status(False)
 
     def handle_step(self):
+        "Handles the step between moves, in which encounters are generated"
         print('\nYou begin walking forward.')
 
         encounter = self.get_random_choice()
         player = self.get_player()
 
         if encounter == 'Pages':
+            # Handles player finding between 1 and 8 pages
             num_pages = randrange(1, 9)
             player.add_trinket(num_pages)
 
@@ -210,11 +217,13 @@ class AdventureGame:
             else:
                 print(f'\nYou find {num_pages} pages.')
         else:
+            # Handles enemy encounters / battles
             self.set_up_enemy(encounter)
             enemy = self.get_enemy()
             enemy.print_intro()
             self.clear_terminal(True)
 
+            # Battle loop
             self.print_battle_status(False)
             while not self.is_battle_over():
                 self.print_attack_help()
@@ -226,35 +235,39 @@ class AdventureGame:
                 if enemy.get_energy() > 0:
                     enemy.attack_player(player)
 
+                self.print_battle_status()
                 if player.get_energy() <= 0:
                     self.handle_player_defeat()
-                else:
-                    self.print_battle_status()
 
             if player.get_energy() > 0:
                 enemy.print_outro()
             else:
                 self.end_game()
 
+            # Clears current enemy
             self.current_enemy = None
 
     def handle_move(self):
+        "Handles a move in the main game loop"
         if self.get_moves() > 1:
             print(f'According to your map, you are {self.get_moves()} moves away from the treasure.')
         else:
             print('According to your map, you are only 1 move away from the treasure!')
 
+        # Increase player energy by 25 when halfway through
         if self.get_moves() == 5 and self.get_player().get_energy() < 100:
             print('The thought of making it halfway to the treasure causes you to regain some energy!')
             self.get_player().add_energy(25)
 
         self.print_help()
         while True:
+            # Gets player choice and handles error caused by input of zero length
             try:
                 choice = input('What do you do ("h" for help)? ')[0].lower()
             except:
                 choice = ''
 
+            # Handles player choice 
             if choice == 's':
                 self.get_player().print_status()
             elif choice == 'l':
@@ -262,6 +275,7 @@ class AdventureGame:
             elif choice == 'h':
                 self.print_help(True)
 
+            # Breaks out of loop if "w" or "q" are selected
             if choice in ['w','q']: break
 
         if choice == 'w':
@@ -269,9 +283,11 @@ class AdventureGame:
         else:
             self.end_game()
 
+        # Clears terminal between moves, waits for input if game is NOT over
         self.clear_terminal(not self.is_game_over())
 
     def handle_treasure(self):
+        "Handles player finding of treasure at end of game"
         print('You find a rock with an engraving of an "X".')
         input('This must be the spot! Press <enter> to continue. ')
 
@@ -293,6 +309,7 @@ class AdventureGame:
         self.clear_terminal(True)
 
     def handle_game_over(self):
+        "Prints end of game stats"
         if self.get_moves() == 0:
             self.get_player().print_end_stats(True)
         else:
@@ -301,6 +318,7 @@ class AdventureGame:
         print('\nGAME OVER!\n')
 
     def run(self):
+        "Runs an instance of the Adventure Game"
         self.print_header()
         self.set_up_player()
         self.print_intro()
@@ -315,4 +333,5 @@ class AdventureGame:
 
         self.handle_game_over()
 
+# Produces an Adventure Game instance and calls its run method
 if __name__ == '__main__': AdventureGame().run()
