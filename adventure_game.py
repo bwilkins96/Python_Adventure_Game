@@ -8,42 +8,57 @@ from enemies import Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
 
 class AdventureGame:
     def __init__(self):
+        """
+        Produces an Adventure Game instance that tracks moves left, whether the game is over,
+        a list of possible encounters, the current enemy, and the player
+        e.g. AdventureGame()
+        """
         self.moves = 10
         self.game_over = False
         self.possible_encounters = [
-            'Pages', 'Crab', 'Philosopher', 'Existential', 'Botzmann'
+            'Pages', 'Crab', 'Philosopher', 'Existential', 'Boltzmann'
         ]
         self.current_enemy = None
         self.player = None
 
     def get_moves(self):
+        "Returns the number of moves left"
         return self.moves
 
     def is_game_over(self):
+        "Returns whether the game is over"
         return self.game_over
 
     def get_encounters(self):
-        return self.possible_encounters
+        "Returns a copy of the list of possible encounters"
+        return self.possible_encounters[:]
 
     def get_enemy(self):
+        "Returns the current enemy"
         return self.current_enemy
 
     def get_player(self):
+        "Returns the player instance"
         return self.player
 
     def decrement_moves(self):
+        "Decreases the remaining moves by 1"
         self.moves -= 1
 
     def end_game(self):
+        "Sets the game over variable to true"
         self.game_over = True
 
     def is_battle_over(self):
+        "Returns whether the current battle is over"
         return not (self.get_enemy().get_energy() > 0 and self.get_player().get_energy() > 0)
 
     def set_up_player(self):
+        "Sets up the player instance for a game"
         while True:
             name = input('\nWhat is your name (<enter> to submit)? ')
 
+            # Validates name length
             if len(name) == 0:
                 print('You didn\'t enter anything! :)')
             elif len(name) > 35:
@@ -54,6 +69,7 @@ class AdventureGame:
         self.player = Player(name)
 
     def set_up_enemy(self, type):
+        "Sets up current enemy based on type"
         if type == 'Crab':
             self.current_enemy = Crab()
         elif type == 'Philosopher':
@@ -63,11 +79,14 @@ class AdventureGame:
         else:
             self.current_enemy = BoltzmannBrain()
 
+        # Adds enemy to player encounter tracking
         self.get_player().add_encounter(self.get_enemy().get_name())
 
     def get_random_choice(self):
+        "Returns a random encounter choice based on probability"
         rand_val = random()
 
+        # Gets index of encounter choice
         if rand_val < 0.35:
             choice = 0
         elif rand_val < 0.55:
@@ -82,6 +101,7 @@ class AdventureGame:
         return self.get_encounters()[choice]
 
     def get_attack_choice(self):
+        "Gets attack choice from user"
         enemy_name = self.current_enemy.get_name().lower()
 
         while True:
@@ -90,6 +110,7 @@ class AdventureGame:
             if len(choice) > 0:
                 choice = choice[0].lower()
 
+            # Validates choice
             if choice in ['a', 'd', 'r', 'q']:
                 break
             elif choice == 'h':
@@ -98,11 +119,16 @@ class AdventureGame:
         return choice
 
     def print_header(self):
+        "Prints header for a game instance"
         print('\n' + ('-'*29))
         print('Welcome to my Adventure Game!')
         print('-'*29)
 
     def print_help(self, additional=False):
+        """
+        Prints help for main game loop
+        Uses additional parameter for printing more info when "h" is pressed
+        """
         if additional:
             print('\nWhen you take a move, there is a chance of encountering enemies')
             print('and possibly finding other interesting things.')
@@ -111,6 +137,10 @@ class AdventureGame:
         print('Press "w" to start walking, "s" to check your status, "l" to look behind you, or "q" to quit')
 
     def print_attack_help(self, additional=False):
+        """
+        Prints help for battles
+        Uses additional parameter for printing more info when "h" is pressed
+        """
         if additional:
             print('\nTry different options on enemies to figure out the best response!')
             print('"q" still ends the game when in a battle.\n')
@@ -118,6 +148,7 @@ class AdventureGame:
         print('Press "a" to attack, "d" to debate, or "r" to reassure')
 
     def print_intro(self):
+        "Prints intro for game instance"
         print(f'Hello Captain {self.get_player().get_name()}!')
 
         print('\nYou are on the beach of an uninhabited island searching for treasure.')
@@ -129,6 +160,7 @@ class AdventureGame:
         self.clear_terminal(True)
 
     def print_battle_status(self, new_line=True):
+        "Prints the current status of the battle"
         p = self.get_player()
         e = self.get_enemy()
 
