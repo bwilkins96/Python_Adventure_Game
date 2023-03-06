@@ -98,7 +98,7 @@ class AdventureGame:
         return choice
 
     def print_header(self):
-        print('-'*29)
+        print('\n' + ('-'*29))
         print('Welcome to my Adventure Game!')
         print('-'*29)
 
@@ -145,7 +145,7 @@ class AdventureGame:
         else:
             system('clear')
 
-        #print('\033c', end='')
+        print()
 
     def handle_player_defeat(self):
         self.print_battle_status()
@@ -256,7 +256,7 @@ class AdventureGame:
         else:
             self.get_player().print_end_stats(False)
 
-        print('\nGAME OVER!')
+        print('\nGAME OVER!\n')
 
     def run(self):
         self.print_header()
