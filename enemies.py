@@ -1,7 +1,16 @@
 # Enemy classes for the Adventure Game project
 
 class Enemy:
+    'An enemy parent class designed for the Adventure Game project'
+
     def __init__(self, name, intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list):
+        """
+        Produces an instance of the enemy class that stores name, intro,
+        outro, messages related to player attacks, an attacking message,
+        and a list of taken damages corresponding to types of player attacks
+
+        This initialization is handled within child classes
+        """
         self.name = name
         self.introduction = intro
         self.outro = outro
@@ -13,59 +22,77 @@ class Enemy:
         self.energy = 100
 
     def get_name(self):
+        "Returns enemy's name"
         return self.name
     
     def get_energy(self):
+        "Returns enemy's energy"
         return self.energy
     
     def get_attacker_msg(self):
+        "Returns enemy's attacking message"
         return self.attacker_msg
     
     def get_damage_list(self):
+        "Returns a copy of the enemy's damage list"
         return self.damage_list[:]
     
     def add_energy(self, amt):
+        "Adds amount to enemy's energy"
         self.energy += amt
+
+        if self.energy > 100:
+            self.add_energy = 100
     
     def reduce_energy(self, amt):
+        "Reduces enemy's energy by amount"
         self.energy -= amt
 
         if self.energy < 0:
             self.energy = 0
     
     def print_intro(self):
+        "Prints enemy's intro"
         for line in self.introduction:
             print(line)
 
     def print_outro(self):
+        "Prints enemy's outro"
         for line in self.outro:
             print(line)
 
     def print_attack_msg(self):
+        "Prints enemy's response to player attack"
         for line in self.attack_msg:
             print(line)
 
     def print_debate_msg(self):
+        "Prints enemy's response to player debate"
         for line in self.debate_msg:
             print(line)
 
     def print_reassurance_msg(self):
+        "Prints enemy's response to player reassurance"
         for line in self.reassurance_msg:
             print(line)
 
     def handle_attack(self):
+        "Handles attack from player"
         self.print_attack_msg()
         self.reduce_energy(self.get_damage_list()[0])
 
     def handle_debate(self):
+        "Handles debate from player"
         self.print_debate_msg()
         self.reduce_energy(self.get_damage_list()[1])
 
     def handle_reassurance(self):
+        "Handles reassurance from player"
         self.print_reassurance_msg()
         self.reduce_energy(self.get_damage_list()[2])
     
     def attack_player(self, player):
+        "Handles enemy's attack of player"
         print(self.get_attacker_msg())
 
         if self.get_name() == 'Botzmann Brain':
@@ -73,8 +100,15 @@ class Enemy:
         else:
             player.reduce_energy(10)
 
+# Child enemy classes
 class Crab(Enemy):
+    'A crab enemy child class'
+
     def __init__(self):
+        """
+        Produces an instance of a crab enemy
+        e.g. Crab()
+        """
         intro = ['\nA crab approaches you!']
         outro = ['The tired crab scurries away.']
         a_msg = ['You attack the crab, which appears to considerably reduce its energy.']
@@ -86,7 +120,13 @@ class Crab(Enemy):
         super().__init__('Crab', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
 
 class Philosopher(Enemy):
+    'A philosopher enemy child class'
+
     def __init__(self):
+        """
+        Produces an instance of a philosopher enemy
+        e.g. Philosopher()
+        """
         intro = [
             '\nA philosopher approaches you, saying "I will convince you to not dig up that',
             'buried treasure! It\'s unnecessary, you see, because I already know what',
@@ -116,7 +156,13 @@ class Philosopher(Enemy):
         super().__init__('Philosopher', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
 
 class ExistentialCrisis(Enemy):
+    'An existential crisis enemy child class'
+
     def __init__(self):
+        """
+        Produces an instance of an existential crisis enemy
+        e.g. ExistentialCrisis()
+        """
         intro = [
             '\nYou are plagued by an existential crisis! What if you discover that',
             'your current beliefs are wrong?'
@@ -139,7 +185,13 @@ class ExistentialCrisis(Enemy):
         super().__init__('Existential Crisis', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
 
 class BoltzmannBrain(Enemy):
+    'A Boltzman brain enemy child class'
+
     def __init__(self):
+        """
+        Produces an instance of a Boltzman brain enemy
+        e.g. BoltzmanBrain()
+        """
         intro = [
             '\nSuprisingly, a floating Boltzmann brain approaches you!',
             'It says to you, from within your own brain, "Yes, I did spontaneously',
