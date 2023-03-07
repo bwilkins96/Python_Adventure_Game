@@ -6,9 +6,8 @@ Running 'python adventure_game.py' will generate and run an instance of the adve
 
 Alternatively, AdventureGame can be imported from 'adventure_game.py'.
 A game can be produced using AdventureGame() and run using the run instance method.
-----------------------------------------------------------------------
+
 e.g. From adventure_game import AdventureGame -> AdventureGame().run()
-----------------------------------------------------------------------
 
 # Requirements #
 This is a very open-ended problem and intentionally so. The goal is for you 

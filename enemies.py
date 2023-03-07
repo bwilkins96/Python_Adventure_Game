@@ -211,4 +211,4 @@ class BoltzmannBrain(Enemy):
         a_msg_2 = '\nThe floating brain hits you with psychic waves emmiting out of it,\nreducing your energy by 20!'
         dmg_list = [20, 100, 0]
 
-        super().__init__('Botzmann Brain', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
+        super().__init__('Boltzmann Brain', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)

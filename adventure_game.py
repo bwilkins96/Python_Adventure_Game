@@ -107,6 +107,8 @@ class AdventureGame:
     def get_attack_choice(self):
         "Gets attack choice from user"
         enemy_name = self.current_enemy.get_name().lower()
+        if enemy_name[0] == 'b': 
+            enemy_name = enemy_name.capitalize()
 
         while True:
             choice = input(f'What do you do about the {enemy_name} ("h" for help)? ')
