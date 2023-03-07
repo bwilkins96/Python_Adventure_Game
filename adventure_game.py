@@ -166,7 +166,7 @@ class AdventureGame:
         self.clear_terminal(True)
 
     def print_battle_status(self, new_line=True):
-        "Prints the current status of the battle"
+        "Prints the current status of a battle"
         p = self.get_player()
         e = self.get_enemy()
 
