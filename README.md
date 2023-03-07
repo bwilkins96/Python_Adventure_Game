@@ -1,12 +1,14 @@
 # Overview #
 This is a text-based adventure game that I designed as my final project
-in SWDV 600: Intro to Programming at Maryville University
+in SWDV 600: Intro to Programming at Maryville University.
 
-Running 'Python adventure_game.py' will generate and run an instance of the adventure game.
+Running 'python adventure_game.py' will generate and run an instance of the adventure game.
 
 Alternatively, AdventureGame can be imported from 'adventure_game.py'.
-e.g. From adventure_game import AdventureGame
-Then, AdventureGame().run() will produce and run a game.
+A game can be produced using AdventureGame() and run using the run instance method.
+----------------------------------------------------------------------
+e.g. From adventure_game import AdventureGame -> AdventureGame().run()
+----------------------------------------------------------------------
 
 # Requirements #
 This is a very open-ended problem and intentionally so. The goal is for you 

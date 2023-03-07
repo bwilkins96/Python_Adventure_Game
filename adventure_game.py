@@ -9,6 +9,8 @@ from player import Player
 from enemies import Crab, Philosopher, ExistentialCrisis, BoltzmannBrain
 
 class AdventureGame:
+    'AdventureGame().run() produces and runs an instance of the game'
+
     def __init__(self):
         """
         Produces an Adventure Game instance that tracks moves left, whether the game is over,
