@@ -13,12 +13,14 @@ class AdventureGame:
 
     def __init__(self):
         """
-        Produces an Adventure Game instance that tracks moves left, whether the game is over,
+        Produces an Adventure Game instance that tracks moves left, 
+        whether the game is over, whether the treasure was found, 
         a list of possible encounters, the current enemy, and the player
         e.g. AdventureGame()
         """
         self.moves = 10
         self.game_over = False
+        self.treasure_found = False
         self.possible_encounters = [
             'Pages', 'Crab', 'Philosopher', 'Existential', 'Boltzmann'
         ]
@@ -32,6 +34,10 @@ class AdventureGame:
     def is_game_over(self):
         "Returns whether the game is over"
         return self.game_over
+    
+    def was_treasure_found(self):
+        "Returns whether the treasure was found"
+        return self.treasure_found
 
     def get_encounters(self):
         "Returns a copy of the list of possible encounters"
@@ -310,11 +316,12 @@ class AdventureGame:
         input('Press <enter> to open the scroll. ')
 
         print('\nYou awaken in your bed, realizing that it was just a dream.')
+        self.treasure_found = True
         self.clear_terminal(True)
 
     def handle_game_over(self):
         "Prints end of game stats"
-        if self.get_moves() == 0:
+        if self.was_treasure_found():
             self.get_player().print_end_stats(True)
         else:
             self.get_player().print_end_stats(False)

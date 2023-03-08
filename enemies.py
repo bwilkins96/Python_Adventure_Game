@@ -95,7 +95,7 @@ class Enemy:
         "Handles enemy's attack of player"
         print(self.get_attacker_msg())
 
-        if self.get_name() == 'Botzmann Brain':
+        if self.get_name()[0] == 'B':
             player.reduce_energy(20)
         else:
             player.reduce_energy(10)
@@ -185,12 +185,12 @@ class ExistentialCrisis(Enemy):
         super().__init__('Existential Crisis', intro, outro, a_msg, d_msg, r_msg, a_msg_2, dmg_list)
 
 class BoltzmannBrain(Enemy):
-    'A Boltzman brain enemy child class'
+    'A Boltzmann brain enemy child class'
 
     def __init__(self):
         """
-        Produces an instance of a Boltzman brain enemy
-        e.g. BoltzmanBrain()
+        Produces an instance of a Boltzmann brain enemy
+        e.g. BoltzmannBrain()
         """
         intro = [
             '\nSuprisingly, a floating Boltzmann brain approaches you!',
