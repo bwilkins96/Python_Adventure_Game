@@ -198,7 +198,7 @@ class AdventureGame:
         # Prints extra line
         print()
 
-        # NOTE: This function does not clear the shell when run in Thonny
+        # NOTE: This function does not clear in certain shell environments
         # This function should work properly when run in a terminal!
 
     def handle_player_defeat(self):
